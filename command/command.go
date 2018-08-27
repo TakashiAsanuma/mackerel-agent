@@ -590,8 +590,8 @@ func collectHostSpecs(conf *config.Config, ameta *AgentMeta) (mackerel.HostSpec,
 	}
 
 	return mackerel.HostSpec{
-		Name:             hostname,
-		Meta:             meta,
+		Name:             "hoge",
+		Meta:             "test",
 		Interfaces:       interfaces,
 		RoleFullnames:    conf.Roles,
 		Checks:           checks,
@@ -602,7 +602,7 @@ func collectHostSpecs(conf *config.Config, ameta *AgentMeta) (mackerel.HostSpec,
 
 // UpdateHostSpecs updates the host information that is already registered on Mackerel.
 func (app *App) UpdateHostSpecs() {
-	logger.Debugf("Updating host specs...")
+	logger.Debugf("Hogehoge Updating host specs...")
 
 	hostSpec, err := collectHostSpecs(app.Config, app.AgentMeta)
 	if err != nil {
@@ -610,7 +610,7 @@ func (app *App) UpdateHostSpecs() {
 		return
 	}
 
-	err = app.API.UpdateHost(app.Host.ID, hostSpec)
+	err = app.API.UpdateHost(app.Host.ID, nil)
 
 	if err != nil {
 		logger.Errorf("Error while updating host specs: %s", err)
