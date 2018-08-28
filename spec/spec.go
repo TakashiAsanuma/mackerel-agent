@@ -3,6 +3,7 @@ package spec
 import (
 	"github.com/mackerelio/golib/logging"
 	"github.com/mackerelio/mackerel-client-go"
+	"github.com/mackerelio/mackerel-agent/config"
 )
 
 var logger = logging.GetLogger("spec")
@@ -13,7 +14,7 @@ type Generator interface {
 }
 
 // Collect spec values
-func Collect(specGenerators []Generator) mackerel.HostMeta {
+func Collect(conf *config.Config, specGenerators []Generator) mackerel.HostMeta {
 	var specs mackerel.HostMeta
 	for _, g := range specGenerators {
 		value, err := g.Generate()
@@ -25,11 +26,19 @@ func Collect(specGenerators []Generator) mackerel.HostMeta {
 		case mackerel.BlockDevice:
 			specs.BlockDevice = v
 		case mackerel.CPU:
-			specs.CPU = v
+                        if conf.HideCpu == true {
+			  specs.CPU = nil
+                        } else {
+			  specs.CPU = v
+                        }
 		case mackerel.FileSystem:
 			specs.Filesystem = v
 		case mackerel.Kernel:
-			specs.Kernel = v
+                        if conf.HideKernel == true {
+			  specs.Kernel = nil
+                        } else {
+			  specs.Kernel = v
+                        }
 		case mackerel.Memory:
 			specs.Memory = v
 		case *mackerel.Cloud:
