@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mackerelio/mackerel-agent/command"
+	"./command"
 	"github.com/mackerelio/mackerel-agent/pidfile"
 )
 

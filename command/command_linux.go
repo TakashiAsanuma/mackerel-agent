@@ -4,8 +4,8 @@ import (
 	"github.com/mackerelio/mackerel-agent/config"
 	"github.com/mackerelio/mackerel-agent/metrics"
 	metricsLinux "github.com/mackerelio/mackerel-agent/metrics/linux"
-	"github.com/mackerelio/mackerel-agent/spec"
-	specLinux "github.com/mackerelio/mackerel-agent/spec/linux"
+	"../spec"
+	specLinux "../spec/linux"
 )
 
 func specGenerators() []spec.Generator {

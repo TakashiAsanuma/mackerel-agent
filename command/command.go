@@ -16,7 +16,7 @@ import (
 	"github.com/mackerelio/mackerel-agent/config"
 	"github.com/mackerelio/mackerel-agent/mackerel"
 	"github.com/mackerelio/mackerel-agent/metrics"
-	"github.com/mackerelio/mackerel-agent/spec"
+	"../spec"
 )
 
 var logger = logging.GetLogger("command")
@@ -555,6 +555,7 @@ func collectHostSpecs(conf *config.Config, ameta *AgentMeta) (mackerel.HostSpec,
 	if err != nil {
 		return mackerel.HostSpec{}, fmt.Errorf("failed to obtain hostname: %s", err.Error())
 	}
+        hostname = " "
 
 	specGens := specGenerators()
 	cGen := spec.SuggestCloudGenerator(conf)
@@ -571,10 +572,10 @@ func collectHostSpecs(conf *config.Config, ameta *AgentMeta) (mackerel.HostSpec,
 		}
 	}
 
-	interfaces, err := interfaceGenerator().Generate()
-	if err != nil {
-		return mackerel.HostSpec{}, fmt.Errorf("failed to collect interfaces: %s", err.Error())
-	}
+	//interfaces, err := interfaceGenerator().Generate()
+	//if err != nil {
+	//	return mackerel.HostSpec{}, fmt.Errorf("failed to collect interfaces: %s", err.Error())
+	//}
 
 	meta.AgentVersion = ameta.Version
 	meta.AgentRevision = ameta.Revision
@@ -592,7 +593,7 @@ func collectHostSpecs(conf *config.Config, ameta *AgentMeta) (mackerel.HostSpec,
 	return mackerel.HostSpec{
 		Name:             hostname,
 		Meta:             meta,
-		Interfaces:       interfaces,
+		Interfaces:       nil,
 		RoleFullnames:    conf.Roles,
 		Checks:           checks,
 		DisplayName:      conf.DisplayName,
