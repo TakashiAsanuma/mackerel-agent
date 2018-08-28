@@ -25,11 +25,11 @@ func Collect(specGenerators []Generator) mackerel.HostMeta {
 		case mackerel.BlockDevice:
 			specs.BlockDevice = v
 		case mackerel.CPU:
-			specs.CPU = v
+			specs.CPU = nil
 		case mackerel.FileSystem:
 			specs.Filesystem = v
 		case mackerel.Kernel:
-			specs.Kernel = v
+			specs.Kernel = nil
 		case mackerel.Memory:
 			specs.Memory = v
 		case *mackerel.Cloud:

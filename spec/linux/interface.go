@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/mackerelio/golib/logging"
-	"github.com/mackerelio/mackerel-agent/spec"
+	"../../spec"
 )
 
 // InterfaceGenerator XXX
