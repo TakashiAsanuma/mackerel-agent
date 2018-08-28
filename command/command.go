@@ -561,7 +561,7 @@ func collectHostSpecs(conf *config.Config, ameta *AgentMeta) (mackerel.HostSpec,
 	if cGen != nil {
 		specGens = append(specGens, cGen)
 	}
-	meta := spec.Collect(specGens)
+	meta := spec.Collect(conf, specGens)
 
 	var customIdentifier string
 	if cGen != nil {
@@ -574,6 +574,9 @@ func collectHostSpecs(conf *config.Config, ameta *AgentMeta) (mackerel.HostSpec,
 	interfaces, err := interfaceGenerator().Generate()
 	if err != nil {
 		return mackerel.HostSpec{}, fmt.Errorf("failed to collect interfaces: %s", err.Error())
+	}
+	if conf.HideInterface == true {
+		interfaces = nil
 	}
 
 	meta.AgentVersion = ameta.Version

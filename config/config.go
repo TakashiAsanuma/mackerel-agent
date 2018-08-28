@@ -102,6 +102,9 @@ type Config struct {
 	Roles         []string
 	Verbose       bool
 	Silent        bool
+	HideCpu       bool
+	HideKernel    bool
+	HideInterface bool
 	Diagnostic    bool          `toml:"diagnostic"`
 	DisplayName   string        `toml:"display_name"`
 	HostStatus    HostStatus    `toml:"host_status"`
